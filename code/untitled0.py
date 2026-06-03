@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 # %%
 
-def cleansing_data(file_loc):
+def cleansing_data(file_loc, output_loc):
     dataset = pd.read_csv(file_loc, decimal='.', thousands=',', encoding='utf-8')
     dataset = dataset.loc[:, ['id', 'latitude', 'longitude',
                                 'neighbourhood_cleansed', 'room_type',
@@ -52,12 +52,51 @@ def cleansing_data(file_loc):
 
     dataset.dropna(inplace = True)
     
+    p33 = dataset["price"].quantile(0.33)
+    p66 = dataset["price"].quantile(0.66)
+    dataset["price_tier"] = pd.cut(
+        dataset["price"],
+        bins=[0, p33, p66, float("inf")],
+        labels=["budget", "mid", "premium"]
+    )
+    
+    dataset.to_csv(output_loc, index=False)
+    
     return dataset
 
 
 # %% Cleansing data for Jun
 
-data_jun = cleansing_data("listings_jun.csv")
-data_sept = cleansing_data("listings_september.csv")
+data_jun = cleansing_data("listings_jun.csv", "listings_jun_clean.csv")
+data_sept = cleansing_data("listings_september.csv", "listings_sept_clean.csv")
     
 print(data_jun.dtypes)
+print()
+print("Ocisceni dataset za jun:")
+print()
+print(data_jun["price_tier"].value_counts())
+# %%EDA vizualizacije
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
