@@ -31,7 +31,7 @@ tf.random.set_seed(42)
 dataset_jun = pd.read_csv("listings_jun_clean.csv")
 dataset_sep = pd.read_csv("listings_sept_clean.csv")
  
-
+#print(dataset_jun.dtypes)
 
 """
   Pravljenje nove kolone annual_revenue, svaki oglas ima cenu po noci i procenjenu popunjenost u
@@ -50,7 +50,6 @@ unutar neuronske mreze.
 
 dataset_jun['annual_revenue'] = dataset_jun['price'] * dataset_jun['occupancy']
 dataset_jun = dataset_jun[dataset_jun['annual_revenue'] > 0].reset_index(drop = True)
-
 
 
 # korelaciona matrica samo za numericke kolone
@@ -76,6 +75,7 @@ x_jun = dataset_jun.drop(columns=[
     'score_communication',
     'score_value',
     'score_accuracy',
+    'revenue'
 ])
 
 plt.figure(figsize=(12, 4))
@@ -204,6 +204,7 @@ plt.show()
 dataset_sep['annual_revenue'] = dataset_sep['price'] * dataset_sep['occupancy']
 dataset_sep = dataset_sep[dataset_sep['annual_revenue'] > 0].reset_index(drop=True)
 
+
 y_sep = dataset_sep['annual_revenue']
 x_sep = dataset_sep.drop(columns=[
     'id',
@@ -217,6 +218,7 @@ x_sep = dataset_sep.drop(columns=[
     'score_communication',
     'score_value',
     'score_accuracy',
+    'revenue'
 ])
 
 
