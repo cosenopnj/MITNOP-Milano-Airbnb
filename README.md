@@ -1,7 +1,6 @@
 # Airbnb Milano — Analiza i detekcija netipičnih oglasa
 
 **Tim:** Teodora Šović (IN 7/2023), Luka Kostić (IN 32/2023), Rastko Penić (IN 54/2023)  
-**Predmet:** Mašinsko i duboko učenje (MITNOP)  
 **Šifra projekta:** Airbnb Milano
 
 ---
